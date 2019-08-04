@@ -1,0 +1,76 @@
+//
+//  main.cpp
+//  hw_1_1.cpp
+//
+//  Created by Madison G Thantu on 1/13/19.
+//  Copyright © 2019 Madison G Thantu. All rights reserved.
+//
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+double* maximum(double a[], int a_size)
+{
+    double* max_pos = a;
+    double max_val = *max_pos;
+    
+    for (int i = 0; i < a_size - 1; i++)
+    {
+        if (a[i] > max_val)
+        {
+            max_pos = &a[i];
+            max_val = *max_pos;
+        }
+    }
+    
+    return max_pos;
+}
+
+int main()
+{
+    
+    char input;
+    bool more = true;
+    while(more)
+    {
+        cout << "Enter a list of numbers: ";
+        string s;
+        getline(cin, s);
+        int a_size = s.length();
+        double* a = new double[a_size];
+        int j = 0;
+        for(int i = 0; i < a_size; i++)
+        {
+            string subs;
+            while(s[i] != ' ')
+            {
+                subs = subs + s[i];
+                i++;
+            }
+            
+            a[j] = stod(subs);
+            j++;
+            
+        }
+        
+        double* max = maximum(a, a_size);
+    
+        int index = max - a;
+        cout << "Maximal element: " << *max << endl;
+        cout << "Index of maximal element: " << index << endl << endl;;
+        
+        delete[] a;
+        
+        cout << "Continue (y/n)?";
+        cin >> input;
+        cin.get();
+        if (input == 'n')
+            more = false;
+        cout << endl;
+
+    }
+    
+    return 0;
+    
+}
